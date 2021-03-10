@@ -1,5 +1,5 @@
 from sklearn.ensemble import RandomForestClassifier
-from boruta import BorutaPy
+#from boruta import BorutaPy
 from sklearn.feature_selection import RFECV
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
@@ -47,66 +47,37 @@ res = q2.sort_values('Sales', ascending=False).head(20)
 b=sns.countplot(x='Sub_Category', data = res)
 plt.title('Top 20 Sales Product Category')
 st.pyplot(fig)
-
-fig = plt.figure()
-st.write("Product With Quantity")
-q10 = df[["Product","Quantity"]]
-q10 = q10.groupby(["Product"]).agg({"Quantity": "sum"}).sort_values('Quantity', ascending=False)
-st.write(q10)
-q10['Product']=q10.index 
-ax = sns.barplot(x="Product", y="Quantity", data=q10)
-sns.set(rc={'figure.figsize':(22.7,40.27)})
-st.pyplot(fig)
-
-fig = plt.figure()
 st.write("Product Sub_Category With Sales")
 q11 = df[["Sub_Category","Sales"]]
 q11 = q11.groupby(["Sub_Category"]).agg({"Sales": "sum"}).sort_values('Sales', ascending=False)
 st.write(q11)
-q11['Sub_Category']=q11.index 
-ax = sns.barplot(x="Sub_Category", y="Sales", data=q11)
-sns.set(rc={'figure.figsize':(22.7,20.27)})
-st.pyplot(fig)
-
-fig = plt.figure()
+st.write("Product With Quantity")
+q10 = df[["Product","Quantity"]]
+q10 = q10.groupby(["Product"]).agg({"Quantity": "sum"}).sort_values('Quantity', ascending=False)
+st.write(q10)
 st.write("Product Sub_Category and Quantity")
 q12 = df[["Sub_Category","Quantity"]]
 q12 = q12.groupby(["Sub_Category"]).agg({"Quantity": "sum"}).sort_values('Quantity', ascending=False)
 st.write(q12)
-q12['Sub_Category']=q12.index 
-ax = sns.barplot(x="Sub_Category", y="Quantity", data=q12)
-sns.set(rc={'figure.figsize':(22.7,20.27)})
-st.pyplot(fig)
-
-fig = plt.figure()
 st.write("Product with the sales")
 q13 = df[["Product","Sales"]]
 q13 = q13.groupby(["Product"]).agg({"Sales": "sum"}).sort_values('Sales', ascending=False)
 st.write(q13)
-q13['Product']=q13.index 
-az = sns.barplot(x="Product", y="Sales", data=q13)
-sns.set(rc={'figure.figsize':(27.7,20.27)})
-st.pyplot(fig)
-
 fig = plt.figure()
 s1 = df[["Segment","Quantity"]]
 s1.groupby(["Segment"]).agg({"Quantity": "sum"}).sort_values('Quantity', ascending=False)
 b=sns.countplot(x='Segment', data = s1)
 plt.title('Category of Segment With Total number of Quantity')
 st.pyplot(fig)
-
 fig = plt.figure()
 b=sns.countplot(x='Category', data = df)
 plt.title('Number of Product Category')
 st.pyplot(fig)
-
 fig = plt.figure()
 sns.distplot(df["Sales"], bins=10)
 plt.title('Product Sales')
 st.pyplot(fig)
-
 st.write("Skewness",df["Sales"].skew())
-
 fig = plt.figure()
 fig, ax = plt.subplots(figsize=(20.7, 8.27))
 sns.boxplot(data=df, x="Category", y="Sales", ax=ax)
@@ -116,7 +87,6 @@ fig = plt.figure()
 fig, ax = plt.subplots(figsize=(18.7, 8.27))
 sns.scatterplot(x='Markup', y='Sales', data=df)
 st.pyplot(fig)
-
 if ml == 'Linear Regression':
     st.header('Linear Regression')
     dataset2 = df.copy()
